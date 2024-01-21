@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+
+[dev-packages]
+black = "*"
+isort = "*"
+pylint = "*"
+pytest = "*"
+
+[requires]
+python_version = "3.12"
+
+[scripts]
+format = "black ."
+sort = "isort . --profile black"
+lint = "pylint ."
+fmt = """sh -c '
+    pipenv run format && \
+    pipenv run sort
+'"""
+clean = """sh -c '
+    pipenv run format && \
+    pipenv run sort && \
+    pipenv run lint
+'"""
+test = "pytest -s"
+app = "python3 main.py"
+dev = "python3 main.py dev"
